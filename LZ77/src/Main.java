@@ -23,7 +23,7 @@ public class Main {
         Tag tag = new Tag(0, 0, text.charAt(0));
         tags.add(tag);
         for (int i = 1; i < text.length(); i++) {
-            if (i < search_window) {
+            if (i <= search_window) {
                 for (int j = 0; j < i; j++) {
                     if (text.charAt(i) == tags.elementAt(j).getNext()) {
                         i++;
