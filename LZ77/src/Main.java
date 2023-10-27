@@ -4,18 +4,6 @@ import java.util.Vector;
 
 public class Main {
     public static void main(String[] args) {
-    //    
-    //    
-    //     
-    //     
-    //     input.close();
-    //     System.out.println(text);
-    //     
-    //     compressed=c.compress(text,0,0);
-    //     for(int i=0;i<compressed.size();i++){
-    //         System.out.println(compressed.elementAt(i).getPosition()+" "+compressed.elementAt(i).getLength()+" "+compressed.elementAt(i).getNext());
-    //     }
-    // }
     Vector<Tag> lastcomperssion = new Vector<>();
     while(true){
         Scanner input = new Scanner(System.in);
