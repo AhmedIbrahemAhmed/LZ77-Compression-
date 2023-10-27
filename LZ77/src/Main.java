@@ -14,6 +14,7 @@ public class Main {
             System.out.print("1-read form the console. \n2-read form file.\nplease enter your choice :");
             int compressChoice=input.nextInt();
             if(compressChoice==1){
+                input.nextLine();
                 System.out.print("enter text to compress: ");
                 String text = input.nextLine();
                 while (text.length() == 0) {
