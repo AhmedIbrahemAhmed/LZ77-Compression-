@@ -27,7 +27,7 @@ public class Compression {
                     }
                     
                     
-                    if(temp.getLength()<=temp2.getLength()){
+                    if(temp.getLength()<temp2.getLength()){
                        
                         temp.setLength(temp2.getLength());
                         
