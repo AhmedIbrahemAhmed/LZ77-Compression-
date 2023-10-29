@@ -67,12 +67,12 @@ public class File_handler {
 
 //        getting the binary format for the overhead
         String binary_bits_length_size, binary_bits_position_size, binary_bits_char_size ;
-        binary_bits_position_size = Integer.toBinaryString(bits_for_position) ;
-        binary_bits_position_size =  String.format("%4s", binary_bits_position_size).replaceAll(" ", "0");
-        binary_bits_length_size = Integer.toBinaryString(bits_for_length) ;
-        binary_bits_length_size =  String.format("%4s", binary_bits_length_size).replaceAll(" ", "0");
-        binary_bits_char_size = Integer.toBinaryString(bits_for_characters) ;
-        binary_bits_char_size =  String.format("%5s", binary_bits_char_size).replaceAll(" ", "0");
+        binary_bits_position_size = Integer.toBinaryString(bits_for_position-1) ;
+        binary_bits_position_size =  String.format("%3s", binary_bits_position_size).replaceAll(" ", "0");
+        binary_bits_length_size = Integer.toBinaryString(bits_for_length-1) ;
+        binary_bits_length_size =  String.format("%3s", binary_bits_length_size).replaceAll(" ", "0");
+        binary_bits_char_size = Integer.toBinaryString(bits_for_characters-1) ;
+        binary_bits_char_size =  String.format("%4s", binary_bits_char_size).replaceAll(" ", "0");
         compressed+= binary_bits_position_size ;
         compressed += binary_bits_length_size ;
         compressed += binary_bits_char_size ;
