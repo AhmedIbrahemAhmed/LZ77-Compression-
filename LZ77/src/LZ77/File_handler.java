@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
@@ -31,19 +32,43 @@ public class File_handler {
 
         return data ;
     }
-    public String Read_compressed(){
+    public Vector<Tag> Read_compressed() throws IOException {
         String filename ;
-        String data= "" ;
+        String binary_data= "" ;
+        Vector<Tag> tags = new Vector<>() ;
         Scanner input = new Scanner(System.in) ;
-        System.out.print("enter file name and path for the decompressed file: ");
+        System.out.print("enter file name and path for the compressed file: ");
         filename = input.nextLine() ;
+        File file = new File(filename) ;
+        while(!file.exists()){
+            System.out.println("file doesn't exist try again");
+            System.out.print("enter file name and path: ");
+            filename = input.nextLine() ;
+            file = new File(filename) ;
+        }
+        Path path = Paths.get(filename) ;
+        byte[] bytes = Files.readAllBytes(path);
+        for(int i=0;i<bytes.length ;i++){
+            binary_data += String.format("%8s", Integer.toBinaryString(bytes[i] & 0xFF)).replace(' ', '0');
+        }
+
+        int bits_for_position =  Integer.parseInt(binary_data.substring(0,3), 2) +1;
+        int bits_for_length = Integer.parseInt(binary_data.substring(3,6), 2) +1;
+        int bits_for_char =  Integer.parseInt(binary_data.substring(6,10), 2) +1;
+        int tag_size = bits_for_length + bits_for_position + bits_for_char ;
+
+        for(int i=10;i<binary_data.length();i+= tag_size){
+            if(i+tag_size>binary_data.length())
+                break ;
+            int position = Integer.parseInt(binary_data.substring(i,i+bits_for_position), 2) ;
+            int length = Integer.parseInt(binary_data.substring(i+bits_for_position,i+bits_for_length+bits_for_position), 2) ;
+            char next = (char)(Integer.parseInt(binary_data.substring(i+bits_for_length+bits_for_position,i+tag_size), 2)) ;
+            Tag temp = new Tag(length,position,next) ;
+            tags.add(temp) ;
+        }
 
 
-
-
-
-
-        return data ;
+        return tags ;
     }
     public void Write_Compressed(Vector<Tag> tags) throws IOException {
         String compressed = "" ;
@@ -115,9 +140,7 @@ public class File_handler {
         }
 //        writing on file
         Files.write(new File(filename).toPath(), bytes);
-//        FileWriter file = new FileWriter(filename) ;
-//        file.write(compressed);
-//        file.close();
+
 
     }
     public void Write_Decompressed(String text) throws IOException {
