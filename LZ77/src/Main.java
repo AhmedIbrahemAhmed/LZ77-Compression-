@@ -32,14 +32,7 @@ public class Main {
             else{
                 File_handler file = new File_handler();
                 lastCompression =compression.compress(file.Read_Original(), 0, 0);
-                System.out.println("the result :");
-                for(int i = 0; i< lastCompression.size(); i++){
-                    if(lastCompression.elementAt(i).getNext()=='\n'){
-                        System.out.println(lastCompression.elementAt(i).getPosition()+" "+ lastCompression.elementAt(i).getLength()+" "+"\\n");
-                        continue;
-                    }
-                    System.out.println(lastCompression.elementAt(i).getPosition()+" "+ lastCompression.elementAt(i).getLength()+" "+ lastCompression.elementAt(i).getNext());
-                }
+                System.out.println("compressed successfully");
             }
             File_handler file = new File_handler() ;
             file.Write_Compressed(lastCompression);
@@ -68,6 +61,12 @@ public class Main {
             }
             else if(decompressChoice==2){
                 String result=decompression.decompress(lastCompression);
+                file.Write_Decompressed(result);
+                System.out.println("decompressed successfully");
+            }
+            else if(decompressChoice==3){
+                tempVector = file.Read_compressed() ;
+                String result=decompression.decompress(tempVector);
                 file.Write_Decompressed(result);
                 System.out.println("decompressed successfully");
             }
