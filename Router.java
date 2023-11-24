@@ -20,7 +20,10 @@ public class Router {
         if(size==maxsize){
             System.out.println("- ("+temp.getDeviceName()+")("+temp.getType()+")arrived and waiting");
         }
-        else System.out.println("- ("+temp.getDeviceName()+")("+temp.getType()+")arrived");
+        else{
+            System.out.println("- ("+temp.getDeviceName()+")("+temp.getType()+")arrived");
+            size++;
+        }
         mutux.signal();
         connections.waiting();
         int order=-1;
@@ -33,7 +36,7 @@ public class Router {
                 break;
             }
         }
-        size++;
+
         mutux.signal();
         System.out.println("- Connection "+(order+1)+": "+temp.getDeviceName()+" Occupied");
         System.out.println("- Connection "+(order+1)+": "+temp.getDeviceName()+" Log in");
