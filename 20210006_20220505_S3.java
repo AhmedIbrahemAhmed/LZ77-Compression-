@@ -61,7 +61,7 @@ class MyRunnable implements Runnable {
         router.arrive(temp);
     }
 }
-class Device extends Thread{
+class Device {
     protected String deviceName;
     protected String type ;
 
@@ -89,7 +89,7 @@ class Device extends Thread{
         Random random = new Random() ;
         int rand = random.nextInt(8000)+1;
         try {
-            sleep(rand);
+            Thread.sleep(rand);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -98,7 +98,7 @@ class Device extends Thread{
         Random random = new Random() ;
         int rand = random.nextInt(1000)+1;
         try {
-            sleep(rand);
+            Thread.sleep(rand);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -107,7 +107,7 @@ class Device extends Thread{
         Random random = new Random() ;
         int rand = random.nextInt(8000)+1 ;
         try {
-            sleep(rand);
+            Thread.sleep(rand);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
