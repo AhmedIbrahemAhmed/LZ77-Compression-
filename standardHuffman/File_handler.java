@@ -49,7 +49,6 @@ public class File_handler {
         }
         HashMap<Character,Integer> frequencies = new HashMap<>() ;
         int numberOfCharacters =  Integer.parseInt(binary_data.substring(0,7), 2) ;
-        System.out.println("number of characters is: "+ numberOfCharacters);
         for(int i = 7;i < (numberOfCharacters*11)+7; i += 11){
 
             char character = (char) Integer.parseInt(binary_data.substring(i,i+7), 2);
@@ -57,7 +56,6 @@ public class File_handler {
             frequencies.put(character,freq) ;
         }
         int numberOfZeros = Integer.parseInt(binary_data.substring((numberOfCharacters*11 +7),(numberOfCharacters*11)+10), 2) ;
-        System.out.println("number of zeros is: "+numberOfZeros);
         String compressedStream = binary_data.substring((numberOfCharacters*11)+10, binary_data.length()-numberOfZeros) ;
         CompressionParsed parsed = new CompressionParsed(frequencies,compressedStream) ;
         return parsed ;
