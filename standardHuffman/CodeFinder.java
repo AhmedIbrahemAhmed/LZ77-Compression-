@@ -40,9 +40,9 @@ public class CodeFinder {
         }
         else{
             if(root.left!=null)
-                codeHuffman(root.left,code+"0", table);
+                codeHuffman(root.left,code+"1", table);
             if(root.right!=null)
-               codeHuffman(root.right,code+"1", table);
+               codeHuffman(root.right,code+"0", table);
         }
     }
 }
