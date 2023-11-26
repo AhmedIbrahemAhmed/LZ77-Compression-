@@ -12,6 +12,7 @@ public class Main {
         File_handler handler = new File_handler() ;
         Compression compression = new Compression();
         Scanner scanner = new Scanner(System.in) ;
+        System.out.println("enter text to compress:");
         String text = scanner.nextLine();
         handler.Write_Compressed(compression.compress(text));
          CompressionParsed parsed = handler.Read_compressed() ;
