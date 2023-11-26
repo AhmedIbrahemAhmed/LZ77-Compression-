@@ -52,7 +52,7 @@ public class File_handler {
         for(int i = 7;i < (numberOfCharacters*11)+7; i += 11){
 
             char character = (char) Integer.parseInt(binary_data.substring(i,i+7), 2);
-            int freq = Integer.parseInt(binary_data.substring(i+7,i+11), 2) ;
+            int freq = Integer.parseInt(binary_data.substring(i+7,i+11), 2) +1 ;
             frequencies.put(character,freq) ;
         }
         int numberOfZeros = Integer.parseInt(binary_data.substring((numberOfCharacters*11 +7),(numberOfCharacters*11)+10), 2) ;

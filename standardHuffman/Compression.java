@@ -20,7 +20,7 @@ public class Compression {
             String character = Integer.toBinaryString(entry.getKey()) ;
             character = String.format("%7s",character).replaceAll(" ", "0") ;
             compressed.append(character) ;
-            String freq = Integer.toBinaryString(entry.getValue()) ;
+            String freq = Integer.toBinaryString(entry.getValue()-1) ;
             freq = String.format("%4s",freq).replaceAll(" ", "0") ;
             compressed.append(freq) ;
         }
