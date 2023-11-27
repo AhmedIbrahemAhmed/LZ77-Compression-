@@ -75,7 +75,7 @@ public class Main {
     }
     private static void showMainFrame(){
         
-        JFrame frame = new JFrame("File Chooser Example");
+        JFrame frame = new JFrame("File Chooser ");
             frame.setSize(1000, 750);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -146,7 +146,7 @@ public class Main {
     }
                     
     private static void saveDecompressed (String stream){
-        JFrame frame = new JFrame("show Decompress Result");
+        JFrame frame = new JFrame("Save Decompress Result");
         frame.setSize(1000, 750);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -184,7 +184,7 @@ public class Main {
         frame.setVisible(true);
     }
     private static void saveCompressResult(String stream){
-        JFrame frame = new JFrame("show Decompress Result");
+        JFrame frame = new JFrame("Save Compress Result");
         frame.setSize(1000, 750);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
