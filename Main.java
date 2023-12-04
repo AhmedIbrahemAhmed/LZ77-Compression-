@@ -11,18 +11,30 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // SwingUtilities.invokeLater(() -> {
         //    showMainFrame();
-        //     }); 
-        int [][] temp= {{1,2,7,9,4,11},{3,4,6,6,12,12},{4,9,15,14,9,9},{10,10,20,18,8,8},{4,3,17,16,1,4},{4,5,18,18,5,6}};
+        //     });
+        File_handler file = new File_handler();
+        int[][] temp = file.Read_Original("images.png") ;
         Compression compression= new Compression(2);
     CompressionParsed t= compression.compress(temp);
-    for(int i=0;i<t.getCompressedStream().length;i++){
-        System.out.print(t.getCompressedStream()[i]+" ");
-    }
-    System.out.println();
-    t.printCodeBook();
+    Decompression decompression = new Decompression() ;
+        int [][] temp2 = decompression.decompress(t) ;
+
+        file.Write_Decompressed(temp2,"decompressed");
+        for(int i=0;i<temp2.length;i++){
+            for(int j=0;j<temp2[i].length;j++) {
+                System.out.print(temp2[i][j]);
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+//    for(int i=0;i<t.getCompressedStream().length;i++){
+//        System.out.print(t.getCompressedStream()[i]+" ");
+//    }
+//    System.out.println();
+//    t.printCodeBook();
 }
 }
    
