@@ -10,6 +10,8 @@ public class Compression {
     }
 
     public CompressionParsed compress(int[][] stream) {
+        int rows = stream.length/subarraySize ;
+        int cols = stream[0].length/subarraySize ;
         int[][][] image = devide(stream);
         Vector<Vector<int[][]>> temp = new Vector<>();
         Vector<int[][]> temp2 = new Vector<>();
@@ -20,7 +22,7 @@ public class Compression {
         Vector<double[][]> averages = new Vector<>();
         double MSE = 60;
         int n = 0;
-        while (MSE > 1&& n < 5) {
+        while (MSE > 1&& n < 8) {
             n++;
             for (int i = 0; i < temp.size(); i++) {
                 averages.add(average(temp.elementAt(i)));
@@ -107,7 +109,7 @@ public class Compression {
             }
 
         }
-        CompressionParsed result = new CompressionParsed(codeBook, compressed);
+        CompressionParsed result = new CompressionParsed(codeBook, compressed, rows, cols);
         return result;
     }
 
