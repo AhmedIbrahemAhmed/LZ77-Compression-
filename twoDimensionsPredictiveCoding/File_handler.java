@@ -101,7 +101,7 @@ public class File_handler {
             binary_num = String.format("%8s",binary_num).replaceAll(" ", "0");
             compressed.append(binary_num);
         }
-
+//saving the rest
         for(int i=1;i<quantized.length;i++){
             for(int j=1;j< quantized[0].length;j++){
                 String binaryCell = Integer.toBinaryString(quantized[i][j]) ;
