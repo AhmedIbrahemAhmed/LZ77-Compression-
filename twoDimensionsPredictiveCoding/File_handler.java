@@ -55,7 +55,7 @@ public class File_handler {
         }
         int temp = (width* 8) + 40 ;
         for(int i = 0; i<height;i++){
-            quantized[0][i] = Integer.parseInt(binary_data.substring(i,i+8), 2) ;
+            quantized[0][i] = Integer.parseInt(binary_data.substring(temp + (i* 8),temp+8 + (i*8)), 2) ;
         }
 
 
