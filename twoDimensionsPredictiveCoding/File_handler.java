@@ -46,18 +46,22 @@ public class File_handler {
         for(int i=0;i<bytes.length ;i++){
             binary_data.append(String.format("%8s", Integer.toBinaryString(bytes[i] & 0xFF)).replace(' ', '0'));
         }
+//        reading the overhead
         int width = Integer.parseInt(binary_data.substring(0,16), 2) ;
         int height = Integer.parseInt(binary_data.substring(16,32), 2) ;
         int[][] quantized = new int[width][height] ;
         int cellSize = Integer.parseInt(binary_data.substring(32,40), 2) ;
+//        reading the first row
         for(int i=0;i< width ;i++){
             quantized[i][0] = Integer.parseInt(binary_data.substring(40 + (i* 8),48 + (i*8) ), 2) ;
         }
         int temp = (width* 8) + 40 ;
+//        reading the first column
         for(int i = 0; i<height;i++){
             quantized[0][i] = Integer.parseInt(binary_data.substring(temp + (i* 8),temp+8 + (i*8)), 2) ;
         }
-
+        temp = 40 + (width* 8) + (height* 8) ;
+//        read the rest after the first row and column here
 
 
         return quantized ;
@@ -65,22 +69,14 @@ public class File_handler {
     public void write_compressed(int[][] quantized, String Path) throws IOException{
         StringBuilder compressed = new StringBuilder();
         String binary_num,binaryHeight,binaryWidth ;
+//        overhead
         binaryWidth =  Integer.toBinaryString(quantized.length) ;
         binaryWidth = String.format("%16s",binaryWidth).replaceAll(" ", "0");
         binaryHeight = Integer.toBinaryString(quantized[0].length) ;
         binaryHeight = String.format("%16s",binaryHeight).replaceAll(" ","0") ;
         compressed.append(binaryWidth) ;
         compressed.append(binaryHeight) ;
-        for(int i=0;i<quantized.length;i++){
-            binary_num = Integer.toBinaryString(quantized[i][0]) ;
-            binary_num = String.format("%8s",binary_num).replaceAll(" ", "0");
-            compressed.append(binary_num);
-        }
-        for(int i=0;i< quantized[0].length;i++){
-            binary_num = Integer.toBinaryString(quantized[0][i]) ;
-            binary_num = String.format("%8s",binary_num).replaceAll(" ", "0");
-            compressed.append(binary_num);
-        }
+        //calculating the max of quantizes and saving it
         int max = quantized[1][1] ;
         for(int i=1;i< quantized.length;i++){
             for(int j=1;j< quantized[0].length;j++){
@@ -93,6 +89,19 @@ public class File_handler {
         binaryBitsForCell = Integer.toBinaryString(bits_for_cell) ;
         binaryBitsForCell = String.format("%8s",binaryBitsForCell).replaceAll(" ", "0");
         compressed.append(binaryBitsForCell);
+
+//        saving first row and column
+        for(int i=0;i<quantized.length;i++){
+            binary_num = Integer.toBinaryString(quantized[i][0]) ;
+            binary_num = String.format("%8s",binary_num).replaceAll(" ", "0");
+            compressed.append(binary_num);
+        }
+        for(int i=0;i< quantized[0].length;i++){
+            binary_num = Integer.toBinaryString(quantized[0][i]) ;
+            binary_num = String.format("%8s",binary_num).replaceAll(" ", "0");
+            compressed.append(binary_num);
+        }
+
         for(int i=1;i<quantized.length;i++){
             for(int j=1;j< quantized[0].length;j++){
                 String binaryCell = Integer.toBinaryString(quantized[i][j]) ;
