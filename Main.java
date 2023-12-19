@@ -10,12 +10,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         File_handler handler = new File_handler();
 
-        int[][] temp = handler.Read_Original("E:\\Data Compression\\Assignment1\\LZ77\\mytest2.jfif"); ;
-        int[][] decompressed = new int[temp.length][temp[0].length] ;
+        int[][] original = handler.Read_Original("E:\\Data Compression\\Assignment1\\LZ77\\mytest.jpg");
         Compression compression = new Compression();
+        int[][] quantized = compression.compress(original) ;
+        handler.write_compressed(quantized,"E:\\Data Compression\\Assignment1\\LZ77\\mytest2compressed1");
+        int[][] compressed = handler.Read_compressed("E:\\Data Compression\\Assignment1\\LZ77\\mytest2compressed1");
         Decompression decompression = new Decompression();
-        decompressed = decompression.decompress(compression.compress(temp));
-        handler.Write_Decompressed(decompressed,"E:\\Data Compression\\Assignment1\\LZ77\\mydecompressedtest2");
+        int[][] decompressed = decompression.decompress(compressed) ;
+        handler.Write_Decompressed(decompressed,"E:\\Data Compression\\Assignment1\\LZ77\\mydecompressedtest1file");
 
 //        SwingUtilities.invokeLater(() -> {
 //           showMainFrame();
