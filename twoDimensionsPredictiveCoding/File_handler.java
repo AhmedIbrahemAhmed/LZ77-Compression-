@@ -62,6 +62,12 @@ public class File_handler {
         }
         temp = 40 + (width* 8) + (height* 8) ;
 //        read the rest after the first row and column here
+        for(int i=1;i<width;i++){
+            for(int j=1;j<height;j++){
+                quantized[i][j] = Integer.parseInt(binary_data.substring(temp,(temp  + cellSize)), 2) ;
+                temp+=cellSize ;
+            }
+        }
 
 
         return quantized ;
